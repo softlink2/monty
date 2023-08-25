@@ -1,32 +1,6 @@
 #include "monty.h"
 
 /**
- * _atoi -  a function that converts a string to integers
- * @str: the string to be converted
- *
- * Return: the resulting integer, if error return 0
- */
-int _atoi(const char *str)
-{
-	int result = 0;
-	int sign = 1;
-
-	if (*str == '-')
-	{
-		sign = -1;
-		str++;
-	}
-	while (*str != '\0')
-	{
-		if (*str < '0' || *str > '9')
-			return (0);
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	return (sign * result);
-}
-
-/**
  * create_node - Creates a new node and adds it to the stack.
  * @head: Pointer to the top of the stack.
  * @n: Value to store in the new node.
@@ -96,4 +70,20 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", curr_node->n);
 		curr_node = curr_node->next;
 	}
+}
+
+/**
+ * pint - Prints the value at the top of the stack.
+ * @stack: Pointer to the top of the stack.
+ * @line_number: Current line number in the file.
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		free_memory(stack);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }
