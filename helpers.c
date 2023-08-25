@@ -16,6 +16,7 @@ int interpret_line(stack_t **stack)
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"swap", swap},
 		{"pop", pop},
 		{"nop", NULL},
 		{NULL, NULL}
