@@ -7,7 +7,6 @@ global_var global;
  * main - Entry Point
  * @argc: argument count
  * @argv: argument value
- *
  * Return: On success, always 0. On failure, -1.
  */
 int main(int argc, char *argv[])
@@ -29,4 +28,25 @@ int main(int argc, char *argv[])
 	free_memory(&stack);
 
 	return (EXIT_SUCCESS);
+}
+/**
+ * free_memory - Frees allocated memory and closes files.
+ *
+ * @stack: The stack
+ */
+void free_memory(stack_t **stack)
+{
+	stack_t *current = *stack;
+	stack_t *next_node;
+
+	while (current != NULL)
+	{
+		next_node = current->next;
+		free(current);
+		current = next_node;
+	}
+
+	*stack = NULL;
+	free(global.line);
+	fclose(global.fd);
 }
